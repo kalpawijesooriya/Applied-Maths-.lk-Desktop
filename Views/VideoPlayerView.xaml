@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="appliedmaths.Views.VideoPlayerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:appliedmaths.Views"
+             xmlns:lcl="clr-namespace:appliedmaths.Helpers" 
+             xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+             mc:Ignorable="d" 
+              Background="LightGray"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             d:DesignWidth="1300">
+
+
+    <Grid>
+        <StackPanel>
+            
+            <DockPanel  Background="White" >
+                <StackPanel DockPanel.Dock="Left">
+                    <Button Background="#ffd302"
+                            Height="70" Width="70" Command="{Binding BackCommand}">
+
+                        <fa5:ImageAwesome Icon="Solid_ArrowLeft" Foreground="Black" Height="30" Width="20" />
+
+                    </Button>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Right" Margin="1020 0 0 0" Orientation="Horizontal">
+                <TextBlock Text="{Binding ProfileName}" Margin="0 25 20 0" FontSize="12" FontWeight="Bold"></TextBlock>
+                <Button  Command="{Binding ShowMenuCommand}" Width="50" Height="50">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Ellipse  >
+                                <Ellipse.Fill >
+                                    <ImageBrush ImageSource="{Binding ProfileImage}" >
+
+                                    </ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </DockPanel>
+            <Border BorderBrush="White" BorderThickness="1" CornerRadius="0 0 5 5" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 0"
+           Visibility="{Binding IsMenuVisible,Converter={StaticResource BooleanToVisibilityConverter},FallbackValue=collapsed}" >
+                <ListBox Background="White" Width="150" Height="100" >
+                    <ListBox.Items>
+                        <ListBoxItem>
+                            <Button  Command="{Binding ProfileCommand}">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <TextBlock  FontSize="12" Foreground="Gray"   HorizontalAlignment="Center"   Text="Profile" Margin="0 0 0 0"/>
+
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Button  Command="{Binding LogoutCommand}">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <TextBlock  FontSize="12" Foreground="Gray"   HorizontalAlignment="Center"   Text="Logout" Margin="0 0 0 0"/>
+
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </ListBoxItem>
+                    </ListBox.Items>
+                </ListBox>
+            </Border>
+            <wv2:WebView2 Name="VideoWebView" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="1270" Source="{Binding Url}" Margin="0,10,0,0"/>
+        </StackPanel>
+      
+    </Grid>
+</UserControl>
